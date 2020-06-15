@@ -1,0 +1,120 @@
+<!doctype html>
+  <title>Analisador Sintático</title>
+  <html dir="ltr" lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" /> 
+    <link rel="stylesheet" href="template.css">
+  </head>
+  <body>
+    <article id="mainArticle">
+        <div class="wrapper">
+          <div>
+            <div class="user-input-wrp">
+              <br/>
+              <input id="inputPalavra" type="text" class="inputText" oninput="iniciarAutomato()" required>
+              <span class="floating-label">Entrada</span>
+            </div>
+            <button class="btn" onclick="gerarSentenca()">Gerar sentença</button>
+            <button class="btn" onclick="limpar()">Limpar</button>
+          </div>
+          <div>
+            <button class="btn" onclick="proximoPasso()">Próximo Passo</button>
+            <button class="btn" onclick="ultimoPasso()">Ir para último passo</button>
+          </div>
+        </div>
+
+        <div id="divTable" class="tg-wrap">
+          <table id="tableAutomato" class="tg">
+          </table>
+        </div>
+    </article>
+    <nav id="mainNav" style="text-align: center;">
+      <div id="divInfo"> 
+        <output><strong>Gramática</strong></output>
+        <div id="divGramatica">
+          <div class="textStart">
+            <span>S  := cBd | aAc</span><br/>
+            <span>A  := dC | bBa</span><br/>
+            <span>B  := bCc | cSb | ε</span><br/>
+            <span>C  := bAa | a</span><br/>
+          </div>
+        </div>
+
+        <div class="divZeroPadding">
+          <div class="divSide" style="width: 45%;">
+            <output><strong>First</strong></output>
+            <div id="divFirst" class="divFirstFollow">
+              <div class="textStart">
+                <span>S = {c, a}</span><br/>
+                <span>A = {d, b}</span><br/>
+                <span>B = {b, c, ε}</span><br/>
+                <span>C = {b, a}</span><br/>
+              </div>
+            </div>
+          </div>
+
+          <div class="divSide" style="width: 40%;">
+            <output><strong>Follow</strong></output>
+            <div id="divFollow" class="divFirstFollow">
+              <div class="textStart">
+                <span>S = {$, b}</span><br/>
+                <span>A = {c, a}</span><br/>
+                <span>B = {d, a}</span><br/>
+                <span>C = {c, a}</span><br/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divZeroPadding">
+        <output><strong>Tabela de Parsing</strong></output>
+        <div id="divTableParsing" class="tg-wrap">
+          <table id="tableParsing" class="tg" style="width: 100%;">
+            <th></th>
+            <th>a</th>
+            <th>b</th>
+            <th>c</th>
+            <th>d</th>
+            <th>$</th>
+            <tr>
+              <td>S</td>
+              <td>S → aAc</td>
+              <td></td>
+              <td>S → cBd</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>A</td>
+              <td></td>
+              <td>A → bBa</td>
+              <td></td>
+              <td>A → dC</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>C</td>
+              <td>B → ε</td>
+              <td>B → bCc</td>
+              <td>B → cSb</td>
+              <td>B → ε</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>C</td>
+              <td>C → a</td>
+              <td>C → bAa</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <span>Feito por: Kelwin Komka </span>
+    </nav>
+  </body>
+  <script src="automato.js"></script>
+</html>
